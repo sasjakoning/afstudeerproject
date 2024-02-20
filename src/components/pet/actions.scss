@@ -1,0 +1,59 @@
+@layer interactions {
+    .shake {
+        animation: shake 0.4s, bounce 2s 0.4s infinite;
+    }
+
+    .scale {
+        animation: scale 0.4s, bounce 2s 0.4s infinite;
+    }
+
+    @keyframes scale {
+        0% {
+            transform: scale(1);
+        }
+    
+        50% {
+            transform: scale(1.2);
+        }
+    
+        100% {
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes shake {
+        0% {
+            translate: 0px;
+        }
+    
+        25% {
+            translate: -5px;
+        }
+    
+        50% {
+            translate: 5px;
+        }
+    
+        75% {
+            translate: -5px;
+        }
+    
+        100% {
+            translate: 0px;
+        }
+    }
+
+    @keyframes bounce {
+        0% {
+            transform: translateY(0);
+        }
+    
+        50% {
+            transform: translateY(20px);
+        }
+    
+        100% {
+            transform: translateY(0);
+        }
+    }
+}
