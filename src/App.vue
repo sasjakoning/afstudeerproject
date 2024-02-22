@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper">
-    <Pet/>
+    <PetMain/>
     <PetStatus/>
   </div>
 </template>
 
 <script setup>
-import Pet from './components/pet/pet.vue'
-import PetStatus from './components/pet-status/pet-status.vue'
+import PetMain from './components/pet-main/pet-main.vue';
+import PetStatus from './components/pet-status/pet-status.vue';
 </script>
 
 <style scoped></style>

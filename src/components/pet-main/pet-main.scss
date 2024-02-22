@@ -32,11 +32,17 @@
         background-color: #5c5c5c;
         border: 1px solid #e0e0e0;
         padding: 2rem;
+        align-content: start;
     }
     
     .text {
         font-size: 1.5rem;
         font-weight: bold;
+        width: 100%;
+
+        display: flex;
+        gap: 1rem;
+        padding-bottom: 1rem;
     }
     
     .character {
