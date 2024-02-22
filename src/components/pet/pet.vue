@@ -33,14 +33,18 @@
 
 <script setup>
 import { computed, ref, watch, onMounted, nextTick } from 'vue';
-import { petProperties, pet, emotions } from '../../resources/petData';
+import { petProperties, pet, emotions, needsAttention } from '../../resources/petData';
 import petHelpers from '../../resources/petHelpers';
 
 const statusMessage = ref('hii');
 const interactionClass = ref('');
-const needsAttention = ref(false);
 
-const checkInteraction = computed(() => interactionClass.value);
+const checkInteraction = computed({
+    get: () => interactionClass.value,
+    set: (newValue) => {
+        interactionClass.value = newValue;
+    }
+});
 const currentEmotion = computed({
     get: () => emotions.value.happy,
     set: (newValue) => {
@@ -48,73 +52,74 @@ const currentEmotion = computed({
     }
 });
 
-petProperties.forEach(property => {
-    watch(() => pet.value[property], (newVal, oldVal) => {
-        if (newVal > 4) {
-            pet.value[property] = 4;
-        } else if (newVal < 0) {
-            pet.value[property] = 0;
-        }
+// petProperties.forEach(property => {
+//     watch(() => pet.value[property], (newVal, oldVal) => {
+//         if (newVal > 4) {
+//             pet.value[property] = 4;
+//         } else if (newVal < 0) {
+//             pet.value[property] = 0;
+//         }
 
-        interactionClass.value = checkStats(property);
-    });
-    nextTick(() => {
-        interactionClass.value = checkStats(property);
-    });
-});
+//         interactionClass.value = checkStats(property);
+//     });
+//     nextTick(() => {
+//         console.log('nextTick')
+//         interactionClass.value = checkStats(property);
+//     });
+// });
 
-watch(() => interactionClass.value, (newVal, oldVal) => {
-    setTimeout(() => {
-        interactionClass.value = '';
-    }, 400);
-});
+// watch(() => interactionClass.value, (newVal, oldVal) => {
+//     setTimeout(() => {
+//         interactionClass.value = '';
+//     }, 400);
+// });
 
-const checkStats = (value) => {
-    console.log(value, pet.value[value])
-    switch (value) {
-        case 'saturation':
-            if (pet.value.saturation < 2) {
-                console.log('hungry');
-                currentEmotion.value = emotions.value.hungry;
-                needsAttention.value = true;
-                return 'shake';
-            }
-        case 'hydration':
-            if (pet.value.hydration < 2) {
-                console.log('thirsty');
-                currentEmotion.value = emotions.value.thirsty;
-                needsAttention.value = true;
-                return 'shake';
-            }
-        case 'health':
-            if (pet.value.health < 2) {
-                console.log('sick');
-                currentEmotion.value = emotions.value.sick;
-                needsAttention.value = true;
-                return 'shake';
-            }
-        case 'happiness':
-            if (pet.value.happiness < 2) {
-                console.log('sad');
-                currentEmotion.value = emotions.value.sad;
-                needsAttention.value = true;
-                return 'shake';
-            }
-        case 'energy':
-            if (pet.value.energy < 2) {
-                console.log('tired');
-                currentEmotion.value = emotions.value.tired;
-                needsAttention.value = true;
-                return 'shake';
-            }
-        default:
-            console.log('fine');
-            needsAttention.value = false;
-            break;
-    }
-}
+// const checkStats = (value) => {
+//     switch (value) {
+//         case 'saturation':
+//             if (pet.value.saturation < 2) {
+//                 console.log('hungry');
+//                 currentEmotion.value = emotions.value.hungry;
+//                 needsAttention.value = true;
+//                 return 'shake';
+//             }
+//         case 'hydration':
+//             if (pet.value.hydration < 2) {
+//                 console.log('thirsty');
+//                 currentEmotion.value = emotions.value.thirsty;
+//                 needsAttention.value = true;
+//                 return 'shake';
+//             }
+//         case 'health':
+//             if (pet.value.health < 2) {
+//                 console.log('sick');
+//                 currentEmotion.value = emotions.value.sick;
+//                 needsAttention.value = true;
+//                 return 'shake';
+//             }
+//         case 'happiness':
+//             if (pet.value.happiness < 2) {
+//                 console.log('sad');
+//                 currentEmotion.value = emotions.value.sad;
+//                 needsAttention.value = true;
+//                 return 'shake';
+//             }
+//         case 'energy':
+//             if (pet.value.energy < 2) {
+//                 console.log('tired');
+//                 currentEmotion.value = emotions.value.tired;
+//                 needsAttention.value = true;
+//                 return 'shake';
+//             }
+//         default:
+//             console.log('fine');
+//             needsAttention.value = false;
+//             break;
+//     }
+// }
 
 const actionFeed = () => {
+    interactionClass.value = '';
     const result = petHelpers.willEat(pet.value, pet.value.saturation, pet.value.health, pet.value.happiness, pet.value.training);
 
     if (result && pet.value.saturation < 4) {
@@ -139,6 +144,7 @@ const actionFeed = () => {
     }
 
     setTimeout(() => {
+        interactionClass.value = '';
         statusMessage.value = '';
         currentEmotion.value = emotions.value.happy;
     }, 3000);

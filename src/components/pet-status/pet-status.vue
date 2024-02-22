@@ -5,31 +5,31 @@
             <tr>
                 <th>Voeding</th>
                 <td>
-                    <span v-for="stars in pet.saturation">⭐</span>
+                    <span v-for="stars in pet.stats.saturation">⭐</span>
                 </td>
             </tr>
             <tr>
                 <th>Hydratatie</th>
                 <td>
-                    <span v-for="stars in pet.hydration">⭐</span>
+                    <span v-for="stars in pet.stats.hydration">⭐</span>
                 </td>
             </tr>
             <tr>
                 <th>Gezondheid</th>
                 <td>
-                    <span v-for="stars in pet.health">⭐</span>
+                    <span v-for="stars in pet.stats.health">⭐</span>
                 </td>
             </tr>
             <tr>
                 <th>Training</th>
                 <td>
-                    <span v-for="stars in pet.training">⭐</span>
+                    <span v-for="stars in pet.stats.training">⭐</span>
                 </td>
             </tr>
             <tr>
                 <th>Geluk</th>
                 <td>
-                    <span v-for="stars in pet.happiness">⭐</span>
+                    <span v-for="stars in pet.stats.happiness">⭐</span>
                 </td>
             </tr>
             <tr>

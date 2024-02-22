@@ -1,4 +1,7 @@
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
+
+let isOverTime = false;
+export const needsAttention = ref(true);
 
 export const petProperties = ['name', 'type', 'age', 'saturation', 'hydration', 'health', 'training', 'happiness', 'energy'];
 
@@ -6,38 +9,63 @@ export const pet = ref({
     name: 'Stinky',
     type: 'dog',
     age: 2,
-    saturation: 1,
-    hydration: 2,
-    health: 3,
-    training: 0,
-    happiness: 0,
-    energy: 3,
+    stats: {
+        saturation: 1,
+        hydration: 2,
+        health: 4,
+        training: 4,
+        happiness: 4,
+        energy: 3,
+    }
 });
 
+const statThresholds = [{ saturation: 2 }, { hydration: 2 }, { health: 1 }, { happiness: 1 }, { energy: 1 }]
+
+watch(pet, (newVal) => {
+    if (isOverTime) {
+        for (const stat in newVal.stats) {
+            for (const threshold of statThresholds) {
+                if (newVal.stats[stat] <= threshold[stat]) {
+                    console.log('low ' + stat)
+                    needsAttention.value = true;
+                }
+            }
+        }
+        isOverTime = false;
+    } else {
+        console.log('not overtime value')
+    }
+}, { deep: true, immediate: true })
+
 function decreaseStatsOverTime() {
-    // min 1 minute max 10
     setInterval(() => {
-        pet.value.saturation -= 1;
+        pet.value.stats.saturation -= 1;
+        isOverTime = true;
     }, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 
     setInterval(() => {
-        pet.value.hydration -= 1;
+        pet.value.stats.hydration -= 1;
+        isOverTime = true;
     }, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 
     setInterval(() => {
-        pet.value.health -= 1;
+        pet.value.stats.health -= 1;
+        isOverTime = true;
     }, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 
     setInterval(() => {
-        pet.value.training -= 1;
+        pet.value.stats.training -= 1;
+        isOverTime = true;
     }, Math.random() * ((100 * 60 * 1000) - (10 * 60 * 1000)) + (1 * 60 * 1000));
 
     setInterval(() => {
-        pet.value.happiness -= 1;
+        pet.value.stats.happiness -= 1;
+        isOverTime = true;
     }, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 
     setInterval(() => {
-        pet.value.energy -= 1;
+        pet.value.stats.energy -= 1;
+        isOverTime = true;
     }, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 }
 
