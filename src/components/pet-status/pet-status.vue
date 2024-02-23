@@ -35,7 +35,7 @@
             <tr>
                 <th>Energie</th>
                 <td>
-                    <span v-for="stars in pet.energy">⭐</span>
+                    <span v-for="stars in pet.stats.energy">⭐</span>
                 </td>
             </tr>
         </table>

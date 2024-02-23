@@ -20,50 +20,57 @@ export const pet = ref({
 const statThresholds = [{ saturation: 2 }, { hydration: 2 }, { health: 1 }, { happiness: 1 }, { energy: 1 }];
 
 watch(pet, (newVal) => {
-	if (isOverTime) {
-		for (const stat in newVal.stats) {
-			for (const threshold of statThresholds) {
-				if (newVal.stats[stat] <= threshold[stat]) {
-					console.log('low ' + stat);
-					needsAttention.value = true;
-				}
+	for (const stat in newVal.stats) {
+		for (const threshold of statThresholds) {
+			if (newVal.stats[stat] <= threshold[stat]) {
+				console.log('low ' + stat);
+				needsAttention.value = true;
 			}
 		}
-		isOverTime = false;
-	} else {
-		console.log('not overtime value');
 	}
+
+	//if all values are above the threshold, the pet is fine
+	if (newVal.stats.saturation > 2 && newVal.stats.hydration > 2 && newVal.stats.health > 1 && newVal.stats.happiness > 1 && newVal.stats.energy > 1) {
+		needsAttention.value = false;
+	}
+	isOverTime = false;
 }, { deep: true, immediate: true });
 
 function decreaseStatsOverTime() {
 	setInterval(() => {
 		pet.value.stats.saturation -= 1;
 		isOverTime = true;
+		console.log('saturation decreased');
 	}, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 
 	setInterval(() => {
 		pet.value.stats.hydration -= 1;
 		isOverTime = true;
+		console.log('hydration decreased');
 	}, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 
 	setInterval(() => {
 		pet.value.stats.health -= 1;
 		isOverTime = true;
+		console.log('health decreased');
 	}, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 
 	setInterval(() => {
 		pet.value.stats.training -= 1;
 		isOverTime = true;
+		console.log('training decreased');
 	}, Math.random() * ((100 * 60 * 1000) - (10 * 60 * 1000)) + (1 * 60 * 1000));
 
 	setInterval(() => {
 		pet.value.stats.happiness -= 1;
 		isOverTime = true;
+		console.log('happiness decreased');
 	}, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 
 	setInterval(() => {
 		pet.value.stats.energy -= 1;
 		isOverTime = true;
+		console.log('energy decreased');
 	}, Math.random() * ((10 * 60 * 1000) - (1 * 60 * 1000)) + (1 * 60 * 1000));
 }
 
