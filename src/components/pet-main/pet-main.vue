@@ -1,5 +1,5 @@
 <template>
-    <div class="pet">
+    <!-- <div class="pet">
         <section class="reaction-box">
             <div class="text">
                 <p v-if="needsAttention"
@@ -27,7 +27,11 @@
         <button class="action" @click="actionPlay">Spelen</button>
         <button class="action" @click="actionPet">Aaien</button>
         <button class="action" @click="actionSleep">Slapen</button>
-    </section>
+    </section> -->
+
+	<section class="pet">
+
+	</section>
 </template>
 
 <script setup>
