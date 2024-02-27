@@ -1,14 +1,14 @@
 <template>
     <nav>
-        <button class="btn-icon-small">
+        <router-link to="/" class="btn-icon-small">
             <img src="https://unsplash.it/24/24" alt="icon" />
-        </button>
-        <button class="btn-icon-small">
+        </router-link>
+        <router-link to="/pet" class="btn-icon-small">
             <img src="https://unsplash.it/24/24" alt="icon" />
-        </button>
-        <button class="btn-icon-small">
+        </router-link>
+        <router-link to="/library" class="btn-icon-small">
             <img src="https://unsplash.it/24/24" alt="icon" />
-        </button>
+        </router-link>
     </nav>
 </template>
 
