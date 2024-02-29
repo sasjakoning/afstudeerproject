@@ -3,43 +3,38 @@
     <router-view :key="$route.fullPath" />
   </transition> -->
 
-  <router-view v-slot="{ Component }">
-    <transition :name="transitionName">
-      <keep-alive>
-        <component :is="Component" :key="$route.fullPath" />
-      </keep-alive>
-    </transition>
-  </router-view>
+  <div class="main-content">
+    <router-view v-slot="{ Component }">
+      <transition :name="transitionName">
+        <keep-alive>
+          <component :is="Component" :key="$route.fullPath"/>
+        </keep-alive>
+      </transition>
+    </router-view>
+  </div>
 
   <Navbar/>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref } from 'vue';
 
 import Navbar from './components/navbar/navbar.vue';
 
+
 let transitionName = ref('slide-left');
-
-const route = useRoute()
-
-// Define a watcher to watch for route changes
-watch(() => route, (to, from) => {
-  console.log('Route changed from:', from, 'to:', to)
-}, { immediate: true })
 
 </script>
 
 <style scoped>
 .slide-left-enter-active,
 .slide-right-leave-active {
-  transition: all 2s ease;
+  transition: all .5s ease;
 }
 
 .slide-left-leave-active,
 .slide-right-enter-active {
-  transition: all 2s ease;
+  transition: all .5s ease;
 }
 
 .slide-right-enter-from,

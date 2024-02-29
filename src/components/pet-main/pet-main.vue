@@ -1,36 +1,6 @@
 <template>
-    <!-- <div class="pet">
-        <section class="reaction-box">
-            <div class="text">
-                <p v-if="needsAttention"
-                >⚠️</p>
-                <p>{{ statusMessage }}</p>
-            </div>
-            <div 
-            class="character"
-            :class="checkInteraction"
-            >
-                {{ currentEmotion }}
-            </div>
-        </section>
-    </div>
-
-    <section class="action-group">
-        <button class="action" @click="actionFeed">Voeren</button>
-        <button class="action" @click="actionCandy">Snoepje</button>
-        <button class="action" @click="actionWater">Water</button>
-        <button class="action" @click="actionFur">Vacht verzorging</button>
-        <button class="action" @click="actionWalk">Uitlaten</button>
-        <button class="action" @click="actionVet">Dierenarts</button>
-        <button class="action" @click="actionTrain">Trainen</button>
-        <button class="action" @click="actionTrick">Trucjes</button>
-        <button class="action" @click="actionPlay">Spelen</button>
-        <button class="action" @click="actionPet">Aaien</button>
-        <button class="action" @click="actionSleep">Slapen</button>
-    </section> -->
-
 	<section class="pet">
-
+		<img src="../../assets/dogy.png" alt="image of a dog">
 	</section>
 </template>
 
